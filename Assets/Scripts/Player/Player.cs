@@ -50,6 +50,7 @@ public class Player : MonoBehaviour {
         body.velocity = new Vector2(horizontal * speed, body.velocity.y);
 
         if (jump) {
+            body.velocity = Vector2.zero;
             body.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             jump = false;
         }
