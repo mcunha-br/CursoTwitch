@@ -6,20 +6,30 @@ public class Player : MonoBehaviour {
 
     public float speed;
     public float jumpForce;
-    public Rigidbody2D body;
-    public Animator anim;
-    public bool faceRight = true;
-    public bool jump;
     public GameObject shootPrefab;
     public Transform barrel;
+    public Transform groundCheck;
+    public LayerMask whatIsGround;
 
+    private Rigidbody2D body;
+    private Animator anim;
+    private bool faceRight = true;
+    private bool jump;
+    public bool isGround;
 
     private float horizontal;
+
+    private void Start() {
+        body = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+
+    }
 
 
     private void Update() {
 
         horizontal = Input.GetAxisRaw("Horizontal");
+        isGround = Physics2D.OverlapCircle(groundCheck.position, 0.02f, whatIsGround);
 
 
         if (horizontal > 0 && faceRight == false || horizontal < 0 && faceRight == true) {
@@ -27,7 +37,7 @@ public class Player : MonoBehaviour {
         }
         
 
-        if(Input.GetButtonDown("Jump")) {
+        if(Input.GetButtonDown("Jump") && isGround) {
             jump = true;
             anim.SetTrigger("jump");
         }
