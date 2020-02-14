@@ -2307,6 +2307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   jumpForce: 8
+  doubleJump: 2
   shootPrefab: {fileID: 1666066362847781804, guid: 376f61888aee6fd4caa52eb0d0f581c2,
     type: 3}
   barrel: {fileID: 753901234}

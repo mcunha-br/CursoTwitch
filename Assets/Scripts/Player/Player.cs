@@ -6,6 +6,7 @@ public class Player : MonoBehaviour {
 
     public float speed;
     public float jumpForce;
+    public int doubleJump = 2;
     public GameObject shootPrefab;
     public Transform barrel;
     public Transform groundCheck;
@@ -15,7 +16,8 @@ public class Player : MonoBehaviour {
     private Animator anim;
     private bool faceRight = true;
     private bool jump;
-    public bool isGround;
+    private bool isGround;
+    private int amountJump;
 
     private float horizontal;
 
@@ -23,6 +25,7 @@ public class Player : MonoBehaviour {
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
+        amountJump = doubleJump;
     }
 
 
@@ -37,10 +40,14 @@ public class Player : MonoBehaviour {
         }
         
 
-        if(Input.GetButtonDown("Jump") && isGround) {
+        if(Input.GetButtonDown("Jump") && amountJump > 1) {
             jump = true;
+            amountJump--;
             anim.SetTrigger("jump");
         }
+
+        if (isGround)
+            amountJump = doubleJump;
 
         if(Input.GetButtonDown("Fire1")) {
             Instantiate(shootPrefab, barrel.position, transform.rotation);
