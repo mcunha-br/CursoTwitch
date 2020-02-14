@@ -4,6 +4,7 @@ using System.Collections;
 public class EnemyPatrol : MonoBehaviour {
 
     public float speed;
+    public float health;
     public Transform groundCheck;
     public LayerMask whatsIsGround;
 
@@ -27,7 +28,6 @@ public class EnemyPatrol : MonoBehaviour {
             Flip();
     }
 
-
     private void Flip() {
         faceRight = !faceRight;
 
@@ -35,5 +35,16 @@ public class EnemyPatrol : MonoBehaviour {
             transform.rotation = Quaternion.Euler(0, 0, 0);
         else
             transform.rotation = Quaternion.Euler(0, 180, 0);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.CompareTag("Shoot")) {
+            health -= 1;
+
+            Destroy(collision.gameObject);
+
+            if (health <= 0)
+                Destroy(gameObject);
+        }
     }
 }
