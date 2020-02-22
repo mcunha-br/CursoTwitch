@@ -13,5 +13,6 @@ public class Shoot : MonoBehaviour {
 
     private void Update() {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
+        
     }
 }

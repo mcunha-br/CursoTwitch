@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
 
     public float speed;
     public float jumpForce;
+    public float health = 50;
     public int doubleJump = 2;
     public GameObject shootPrefab;
     public Transform barrel;
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour {
     private bool jump;
     private bool isGround;
     private int amountJump;
+    public bool death { get; set; }
 
     private float horizontal;
 
@@ -72,6 +74,8 @@ public class Player : MonoBehaviour {
             jump = false;
         }
     }
+
+   
 
 
     private void Flip() {
