@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour {
             Destroy(collision.gameObject);
 
             if (health <= 0)
-                Destroy(gameObject);
+                OnDeath();
         }
     }
 
@@ -31,5 +31,16 @@ public class Enemy : MonoBehaviour {
         sprite.color = Color.red;
         yield return new WaitForSeconds(0.2f);
         sprite.color = Color.white;
+
+        OnDamage();
+    }
+
+
+    protected virtual void OnDamage() {
+
+    }
+
+    protected virtual void OnDeath() {
+
     }
 }

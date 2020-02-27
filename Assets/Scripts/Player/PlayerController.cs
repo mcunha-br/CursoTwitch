@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour {
 
     public float speed;
     public float jumpForce;
-    public float health = 50;
+    private float health = 50;
     public int doubleJump = 2;
     public GameObject shootPrefab;
     public Transform barrel;
@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody2D body;
     private Animator anim;
+    private UIGamePlayer uIGamePlayer;
     private bool faceRight = true;
     private bool jump;
     private bool isGround;
@@ -23,11 +24,27 @@ public class PlayerController : MonoBehaviour {
 
     private float horizontal;
 
+
+    public float Health {
+        get => health;
+        set {
+            health = value;
+            uIGamePlayer.health.value = health;
+            if(health <= 0) {
+                death = true;
+            }
+        }
+    }
+
+
     private void Start() {
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        uIGamePlayer = FindObjectOfType<UIGamePlayer>();
+        Health = 50;
 
         amountJump = doubleJump;
+
     }
 
 

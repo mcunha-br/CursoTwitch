@@ -50,10 +50,10 @@ public class Skeleton : Enemy {
 
 
     private void Attack() {
-        //var rand = Random.Range(0, 100);
-        //if (rand <= 50)
-        //    anim.Play("attack");
-        //else
+        var rand = Random.Range(0, 100);
+        if (rand <= 75)
+            anim.Play("attack");
+        else
             anim.Play("magia");
 
         speedCurrent = 0;
@@ -76,5 +76,9 @@ public class Skeleton : Enemy {
 
     public void InvokeMagic() {
         Instantiate(magic, pointMagic.position, transform.rotation);
+    }
+
+    protected override void OnDeath() {
+        Destroy(gameObject);
     }
 }

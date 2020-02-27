@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyPatrol : MonoBehaviour {
+public class EnemyPatrol : Enemy {
 
     public float speed;
-    public float health;
     public Transform groundCheck;
     public LayerMask whatsIsGround;
 
@@ -14,7 +13,8 @@ public class EnemyPatrol : MonoBehaviour {
 
 
 
-    private void Start() {
+    private new void Start() {
+        base.Start();
         body = GetComponent<Rigidbody2D>();
     }
 
@@ -37,14 +37,8 @@ public class EnemyPatrol : MonoBehaviour {
             transform.rotation = Quaternion.Euler(0, 180, 0);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.CompareTag("Shoot")) {
-            health -= 1;
 
-            Destroy(collision.gameObject);
-
-            if (health <= 0)
-                Destroy(gameObject);
-        }
+    protected override void OnDeath() {
+        Destroy(gameObject);
     }
 }
